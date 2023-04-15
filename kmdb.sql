@@ -137,37 +137,98 @@ CREATE TABLE roles (
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
 
-INSERT INTO movies (
-    actor_name
-)
-VALUES 
-    ("Batman Begins","2005","PG-13","Warner Bros."),
-    ("The Dark Knight","2008","PG-13","Warner Bros."),
-    ("The Dark Knight Rises","2012","PG-13","Warner Bros.");
+--movies data
 
-INSERT INTO actors (
-    actor_name
-)
-VALUES
-    ("Christian Bale"),
-    ("Michael Caine"),
-    ("Liam Neeson"),
-    ("Katie Holmes"),
-    ("Gary Oldman"),
-    ("Heath Ledger"),
-    ("Aaron Eckhart"),
-    ("Maggie Gyllenhaal"),
-    ("Tom Hardy"),
-    ("Joseph Gordon-Levitt"),
-    ("Anne Hathaway");
+INSERT INTO movies (movie_name, release_year, rating, studio_name) 
+VALUES ("Batman Begins",2005,"PG-13","Warner Bros.");
 
+INSERT INTO movies (movie_name, release_year, rating, studio_name) 
+VALUES ("The Dark Knight",2008,"PG-13","Warner Bros.");
 
-INSERT INTO roles (
-    first_name,
-    last_name,
-    email
-)
-VALUES ("Jane","DOE","Carlo");
+INSERT INTO movies (movie_name, release_year, rating, studio_name) 
+VALUES ("The Dark Knight Rises",2012,"PG-13","Warner Bros.");
+
+--actors data
+
+INSERT INTO actors (actor_name)
+VALUES("Christian Bale");
+
+INSERT INTO actors (actor_name)
+VALUES ("Michael Caine");
+    
+INSERT INTO actors (actor_name)
+VALUES ("Liam Neeson");
+    
+INSERT INTO actors (actor_name)
+VALUES ("Katie Holmes");
+
+INSERT INTO actors (actor_name)
+VALUES ("Gary Oldman");
+
+INSERT INTO actors (actor_name)
+VALUES ("Heath Ledger");
+
+INSERT INTO actors (actor_name)
+VALUES ("Aaron Eckhart");
+
+INSERT INTO actors (actor_name)
+VALUES ("Maggie Gyllenhaal");
+
+INSERT INTO actors (actor_name)
+VALUES ("Tom Hardy");
+
+INSERT INTO actors (actor_name)
+VALUES ("Joseph Gordon-Levitt");
+
+INSERT INTO actors (actor_name)
+VALUES("Anne Hathaway");
+
+--roles data
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Bruce Wayne","1","1");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Alfred","2","1");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Ra's Al Ghul","3","1");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Rachel Dawes","4","1");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Commissioner Gordon","5","1");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Bruce Wayne","1","2");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Joker","6","2");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Harvey Dent","7","2");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Alfred","2","2");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Rachel Dawes","8","2");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Bruce Wayne","1","3");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Commissioner Gordon","5","3");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Bane","9","3");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("John Blake","10","3");
+
+INSERT INTO roles (charachter, actor_id, movie_id)
+VALUES ("Selina Kyle","11","3");
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -177,12 +238,23 @@ VALUES ("Jane","DOE","Carlo");
 -- The SQL statement for the movies output
 -- TODO!
 
+SELECT movie_name, release_year, rating, studio_name 
+FROM movies;
+
 -- Prints a header for the cast output
 .print ""
 .print "Top Cast"
 .print "========"
 .print ""
 
-
 -- The SQL statement for the cast output
 -- TODO!
+
+SELECT m.movie_name, a.actor_name, r.charachter
+FROM roles as r
+
+LEFT JOIN actors as a
+on r.actor_id = a.id
+
+LEFT JOIN movies as m
+on m.id = r.movie_id;
